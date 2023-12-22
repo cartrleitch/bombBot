@@ -3,7 +3,6 @@ from discord import app_commands
 import os
 from dotenv import load_dotenv
 import pyautogui as pg
-import time
 
 def main():
 
@@ -61,7 +60,6 @@ def main():
         selectStock(stock, int(timeframe))
         await interaction.response.send_message(file=discord.File('chart.jpg'))
 
-    # selectStock()
     client.run(TOKEN)
 
 if __name__ == '__main__':
