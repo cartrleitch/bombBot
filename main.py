@@ -33,12 +33,10 @@ def main():
     def selectStock(stock, timeChoice):
         # select stock
         print("1. 5 min\n2. 1 hour\n3. 1 day")
-        time.sleep(1)
         pg.moveTo(100, 96)
         pg.click()
         pg.write(stock)
         pg.press('enter')
-        time.sleep(1)
 
         # select time-frame
         pg.moveTo(214,108)
