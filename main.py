@@ -58,9 +58,9 @@ def main():
         chart1.save('chart.jpg')
 
     @tree.command(name="stock", guild=None)
-    async def stock(interaction: discord.Interaction, stock: str, timeChoice: str):
+    async def stock(interaction: discord.Interaction, stock: str, timeframe: str):
         """takes screenshot of stock chart"""
-        selectStock(stock, int(timeChoice))
+        selectStock(stock, int(timeframe))
         await interaction.response.send_message(file=discord.File('chart.jpg'))
 
     # selectStock()
