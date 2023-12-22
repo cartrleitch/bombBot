@@ -23,15 +23,20 @@ def main():
     # makes tree for commands
     tree = app_commands.CommandTree(client, fallback_to_global=True)
 
-    def selectStock():
+    @client.event
+    async def on_ready():
+        """prints message when login and connection is successful (bot is up and running)"""
+        await tree.sync(guild=None)
+        print("Reddy")
+        print("-------------")
+
+    def selectStock(stock, timeChoice):
         # select stock
-        stockChoice = input("Enter stock: ")
         print("1. 5 min\n2. 1 hour\n3. 1 day")
-        timeChoice = int(input("Enter time-frame: "))
-        time.sleep(2)
+        time.sleep(1)
         pg.moveTo(100, 96)
         pg.click()
-        pg.write(stockChoice)
+        pg.write(stock)
         pg.press('enter')
         time.sleep(1)
 
@@ -52,7 +57,13 @@ def main():
         chart1 = pg.screenshot()
         chart1.save('chart.jpg')
 
-    selectStock()
+    @tree.command(name="stock", guild=None)
+    async def stock(interaction: discord.Interaction, stock: str, timeChoice: str):
+        """takes screenshot of stock chart"""
+        selectStock(stock, int(timeChoice))
+        await interaction.response.send_message(file=discord.File('chart.jpg'))
+
+    # selectStock()
     client.run(TOKEN)
 
 if __name__ == '__main__':
